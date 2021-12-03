@@ -297,6 +297,10 @@
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\AspNetUsers\Mensaje.cshtml" />
+    <Content Include="Views\AspNetUsers\Mensajes.cshtml" />
+    <Content Include="Views\AspNetUsers\Mensaje1.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

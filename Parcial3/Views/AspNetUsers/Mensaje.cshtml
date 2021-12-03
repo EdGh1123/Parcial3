@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Parcial3.Models.AspNetUsers>
+
+@{
+    ViewBag.Title = "Mensaje";
+}
+
+<h2>Mensaje</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+       
+        
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+          
+            @Html.ActionLink("Enviar Mensaje", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
