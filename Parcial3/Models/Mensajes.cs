@@ -14,14 +14,11 @@ namespace Parcial3.Models
     
     public partial class Mensajes
     {
-        public int Id { get; set; }
-        public string Id_persona1 { get; set; }
-        public string Id_persona2 { get; set; }
-        public string Mensaje { get; set; }
-        public byte[] hora { get; set; }
-        public string coste_de_envio { get; set; }
+        public long IdMensajes { get; set; }
+        public string MensajeDescripcion { get; set; }
+        public long CostoMensaje { get; set; }
+        public long ConversacionId { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
+        public virtual Conversacion Conversacion { get; set; }
     }
 }

@@ -1,32 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TelPersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TelPersEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="TelPersModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="TelPersModel.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="TelPersModel.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="TelPersModel.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="TelPersModel.AspNetUsers" />
+    <EntitySet Name="Conversacion" EntityType="TelPersModel.Conversacion" />
+    <EntitySet Name="Mensajes" EntityType="TelPersModel.Mensajes" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="TelPersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="TelPersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mensajes_Asp" Association="TelPersModel.FK_Mensajes_Asp">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Conversacion" EntitySet="Conversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mensajes_Asp2_1" Association="TelPersModel.FK_Mensajes_Asp2_1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Conversacion" EntitySet="Conversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mensajes_ToTable" Association="TelPersModel.FK_Mensajes_ToTable">
+      <End Role="Conversacion" EntitySet="Conversacion" />
+      <End Role="Mensajes" EntitySet="Mensajes" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="TelPersModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="C__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
       <PropertyRef Name="ContextKey" />
     </Key>
-    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="TelPersModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="AspNetUserClaims">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers" Relationship="TelPersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="AspNetUserLogins">
     <Key>
@@ -34,16 +67,16 @@
       <PropertyRef Name="ProviderKey" />
       <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="TelPersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="AspNetUsers">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -56,31 +89,39 @@
     <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
     <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
     <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-    <NavigationProperty Name="Mensajes" Relationship="Self.FK_Mensajes_ToTable" FromRole="AspNetUsers" ToRole="Mensajes" />
-    <NavigationProperty Name="Mensajes1" Relationship="Self.FK_Mensajes_ToTable_1" FromRole="AspNetUsers" ToRole="Mensajes" />
-    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="TelPersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="TelPersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="Conversacion" Relationship="TelPersModel.FK_Mensajes_Asp" FromRole="AspNetUsers" ToRole="Conversacion" />
+    <NavigationProperty Name="Conversacion1" Relationship="TelPersModel.FK_Mensajes_Asp2_1" FromRole="AspNetUsers" ToRole="Conversacion" />
+    <NavigationProperty Name="AspNetRoles" Relationship="TelPersModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
   </EntityType>
-  <EntityType Name="Mensajes">
+  <EntityType Name="Conversacion">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Id_persona1" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Id_persona2" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Mensaje" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="hora" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="coste_de_envio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Mensajes_ToTable" FromRole="Mensajes" ToRole="AspNetUsers" />
-    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_Mensajes_ToTable_1" FromRole="Mensajes" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers" Relationship="TelPersModel.FK_Mensajes_Asp" FromRole="Conversacion" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="TelPersModel.FK_Mensajes_Asp2_1" FromRole="Conversacion" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Mensajes" Relationship="TelPersModel.FK_Mensajes_ToTable" FromRole="Conversacion" ToRole="Mensajes" />
+  </EntityType>
+  <EntityType Name="Mensajes">
+    <Key>
+      <PropertyRef Name="IdMensajes" />
+    </Key>
+    <Property Name="IdMensajes" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MensajeDescripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CostoMensaje" Type="Int64" Nullable="false" />
+    <Property Name="ConversacionId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Conversacion" Relationship="TelPersModel.FK_Mensajes_ToTable" FromRole="Mensajes" ToRole="Conversacion" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+    <End Type="TelPersModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <End Type="TelPersModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
@@ -91,10 +132,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+    <End Type="TelPersModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <End Type="TelPersModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
@@ -104,60 +145,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mensajes_ToTable">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+  <Association Name="FK_Mensajes_Asp">
+    <End Type="TelPersModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="TelPersModel.Conversacion" Role="Conversacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Mensajes">
+      <Dependent Role="Conversacion">
         <PropertyRef Name="Id_persona1" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mensajes_ToTable_1">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+  <Association Name="FK_Mensajes_Asp2_1">
+    <End Type="TelPersModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="TelPersModel.Conversacion" Role="Conversacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Mensajes">
+      <Dependent Role="Conversacion">
         <PropertyRef Name="Id_persona2" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="AspNetUserRoles">
-    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+  <Association Name="FK_Mensajes_ToTable">
+    <End Type="TelPersModel.Conversacion" Role="Conversacion" Multiplicity="1" />
+    <End Type="TelPersModel.Mensajes" Role="Mensajes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mensajes">
+        <PropertyRef Name="ConversacionId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TelPersEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-    <EntitySet Name="Mensajes" EntityType="Self.Mensajes" />
-    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mensajes_ToTable" Association="Self.FK_Mensajes_ToTable">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Mensajes" EntitySet="Mensajes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mensajes_ToTable_1" Association="Self.FK_Mensajes_ToTable_1">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Mensajes" EntitySet="Mensajes" />
-    </AssociationSet>
-    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-    </AssociationSet>
-  </EntityContainer>
+  <Association Name="AspNetUserRoles">
+    <End Type="TelPersModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="TelPersModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
 </Schema>

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 text-center">
+    <h3>@ViewBag.Nombre</h3>
+    <p>@ViewBag.Numero</p>
+</div>
+<div class="col-md-12 d-flex"
+
+
+    <div>
+
+        @foreach (var Mensajes in (List<Parcial3.Models.Mensajes>)ViewBag.Mensajes)
+        {
+
+        <div>
+
+            <input class="form-control" type="text" value="@Mensajes.MensajeDescripcion" aria-label="readonly input example" readonly>
+        </div>
+        }
+        <hr />
+    </div>
+
+
+<div class="row form-group">
+    <div class="col-md-12">
+        <p class="text-danger" style="margin: 3px 0 3px 0;">@ViewBag.Error2</p>
+    </div>
+    <div class="col-md-12">
+
+        <form action="@Url.Content("~/Mensajes/Crear")" method="post">
+            <div class="col-md-12 ">
+                <label>&nbsp;</label><br />
+
+                <label for="exampleFormControlTextarea1" class="form-label">Envia un mensaje de texto</label>
+                <textarea class="form-control" name="Mensaje" rows="3"></textarea>
+
+
+            </div>
+            <div class="col-md-3">
+                <label>&nbsp;</label><br />
+                <input type="submit" value="Enviar" class="btn btn-default" style="width: 100px;" />
+                @Html.ActionLink("Cancelar", "Cancelar", null, new { @class = "btn btn-primary" })
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+    
+<br />

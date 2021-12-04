@@ -19,8 +19,8 @@ namespace Parcial3.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            this.Mensajes = new HashSet<Mensajes>();
-            this.Mensajes1 = new HashSet<Mensajes>();
+            this.Conversacion = new HashSet<Conversacion>();
+            this.Conversacion1 = new HashSet<Conversacion>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
@@ -44,9 +44,9 @@ namespace Parcial3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mensajes> Mensajes { get; set; }
+        public virtual ICollection<Conversacion> Conversacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mensajes> Mensajes1 { get; set; }
+        public virtual ICollection<Conversacion> Conversacion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }

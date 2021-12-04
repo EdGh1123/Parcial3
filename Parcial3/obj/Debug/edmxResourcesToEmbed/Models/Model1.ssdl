@@ -63,16 +63,22 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
-  <EntityType Name="Mensajes">
+  <EntityType Name="Conversacion">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id_persona1" Type="nvarchar" MaxLength="128" />
     <Property Name="Id_persona2" Type="nvarchar" MaxLength="128" />
-    <Property Name="Mensaje" Type="varchar" MaxLength="500" />
-    <Property Name="hora" Type="timestamp" StoreGeneratedPattern="Computed" />
-    <Property Name="coste_de_envio" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Mensajes">
+    <Key>
+      <PropertyRef Name="IdMensajes" />
+    </Key>
+    <Property Name="IdMensajes" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MensajeDescripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="CostoMensaje" Type="bigint" Nullable="false" />
+    <Property Name="ConversacionId" Type="bigint" Nullable="false" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -130,27 +136,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mensajes_ToTable">
+  <Association Name="FK_Mensajes_Asp">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+    <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Mensajes">
+      <Dependent Role="Conversacion">
         <PropertyRef Name="Id_persona1" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mensajes_ToTable_1">
+  <Association Name="FK_Mensajes_Asp2_1">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+    <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Mensajes">
+      <Dependent Role="Conversacion">
         <PropertyRef Name="Id_persona2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mensajes_ToTable">
+    <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="1" />
+    <End Role="Mensajes" Type="Self.Mensajes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mensajes">
+        <PropertyRef Name="ConversacionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -161,6 +179,7 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Conversacion" EntityType="Self.Conversacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mensajes" EntityType="Self.Mensajes" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -178,12 +197,16 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK_Mensajes_ToTable" Association="Self.FK_Mensajes_ToTable">
+    <AssociationSet Name="FK_Mensajes_Asp" Association="Self.FK_Mensajes_Asp">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Mensajes" EntitySet="Mensajes" />
+      <End Role="Conversacion" EntitySet="Conversacion" />
     </AssociationSet>
-    <AssociationSet Name="FK_Mensajes_ToTable_1" Association="Self.FK_Mensajes_ToTable_1">
+    <AssociationSet Name="FK_Mensajes_Asp2_1" Association="Self.FK_Mensajes_Asp2_1">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Conversacion" EntitySet="Conversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mensajes_ToTable" Association="Self.FK_Mensajes_ToTable">
+      <End Role="Conversacion" EntitySet="Conversacion" />
       <End Role="Mensajes" EntitySet="Mensajes" />
     </AssociationSet>
   </EntityContainer>

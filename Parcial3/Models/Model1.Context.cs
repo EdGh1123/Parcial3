@@ -30,6 +30,7 @@ namespace Parcial3.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Conversacion> Conversacion { get; set; }
         public virtual DbSet<Mensajes> Mensajes { get; set; }
     }
 }

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h2>Conversacion</h2>
+    <div class="text-danger">
+        @ViewBag.Error
+    </div>
+    @if (ViewBag.BooleanF != false)
+    {
+        <form action="@Url.Content("~/MJ/Conversacion")" method="post">
+            <div class="form-group col-md-3">
+                <label>Celular Origen</label><br />
+                @Html.DropDownList("user", null, new { @Name = "IdPersona", @class = "form-control", @Id = "CelOrigen" })
+            </div>
+            <div class="form-group col-md-3">
+                <label>Celular Destino</label><br />
+                @Html.DropDownList("user2", null, new { @Name = "IdPersona2", @class = "form-control", @Id = "CelDestino" })
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label>&nbsp;</label><br />
+                <input type="submit" value="Abrir Conversacion" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    }
+</div>
+
+
